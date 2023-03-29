@@ -28,6 +28,8 @@
 		  <a class="text-white font-bold hover:text-blue-400" href="/contact">Contact US</a>
 		  <a class="text-white font-bold hover:text-blue-400" href="/about">About Us</a>
 		  <a class="text-white font-bold hover:text-blue-400" href="/about">Admin</a>
+		  <a class="text-white font-bold hover:text-blue-400" href="/about">Admin2</a>
+
 		</div>
 	 </nav>
 	</div>
