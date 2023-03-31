@@ -1,4 +1,5 @@
 <script lang="ts">
+
 export let addproduct:boolean=false;
 function toggleAddProduct(){
   addproduct = !addproduct 
@@ -171,3 +172,4 @@ function toggleAddProduct(){
   </form>
 </div>
 </div>
+

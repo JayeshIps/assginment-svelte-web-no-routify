@@ -5,6 +5,7 @@
 	import ProductView from "./Components/ProductView.svelte";
 </script>
 
+
 <Navbar />
 
 	
