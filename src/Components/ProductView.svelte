@@ -1,7 +1,7 @@
 <script lang="ts">
 export let addproduct:boolean=false;
 function toggleAddProduct(){
-  addproduct = !addproduct
+  addproduct = !addproduct 
 }
 
 </script>
@@ -53,7 +53,7 @@ function toggleAddProduct(){
                 <td class="px-6 py-4">
                     <div class="flex items-center space-x-3">
                          <div>
-                            <p> Mira Rodeo </p>   
+                            <p> Mira Rode </p>   
                         </div>
                     </div>
                 </td>

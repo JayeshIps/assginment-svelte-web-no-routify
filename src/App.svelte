@@ -8,7 +8,7 @@
 <Navbar />
 
 	
-	<Home/>
+<Home/>
 <ProductView/>
 <Footer/>
 
