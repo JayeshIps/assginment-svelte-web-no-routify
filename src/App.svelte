@@ -7,6 +7,9 @@
 
 
 <Navbar />
+
+	
 <Home/>
 <ProductView/>
 <Footer/>
+

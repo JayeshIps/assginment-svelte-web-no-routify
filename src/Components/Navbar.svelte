@@ -23,8 +23,9 @@
                
             </div>
 	    </div>	
-	  
-        <nav class="container px-6 py-8 mx-auto md:flex  md:items-center">
+
+        <nav class="container px-1 py-1 mx-auto md:flex  md:items-center">
+
 	   <div class=" menu flex-col max-w-full mt-8 space-y-4 
 	    md:flex 
 		md:flex-row 
