@@ -2,7 +2,7 @@
   import { writable, type Writable} from 'svelte/store';
 
    // start validation form
-  const formValidation = (): boolean => {
+ const formValidation = (): boolean => {
     const ProductName: string = (document.getElementById("name") as HTMLInputElement).value;
     const Description: string = (document.getElementById("desc") as HTMLInputElement).value;
     const ProductPrice: string = (document.getElementById("price") as HTMLInputElement).value;
@@ -49,8 +49,8 @@
       return false;
     }
   
-    if (ProductPrice.length<= 2 || ProductPrice.length == 10) {
-      (document.getElementById("pro_price") as HTMLElement).innerHTML = "Enter Price Only 2Digit to between 10Digit Number";
+    if (ProductPrice.length<= 3 || ProductPrice.length == 10) {
+      (document.getElementById("pro_price") as HTMLElement).innerHTML = "Enter Price Only 3Digit to between 10Digit Number";
       return false;
     }
   
@@ -76,32 +76,36 @@ function toggleEditProduct(){
 }
 
 //.........Start Add data in table...........
-const storedProductData = localStorage.getItem('productData');
-const currentProductData = storedProductData ? JSON.parse(storedProductData) : [];
+
+type Product={
+  name:string,
+  desc:string,
+  price:string;
+}
+
+const productStore: Writable<Product[]> = writable([]);
 
 
-const productStore = writable(currentProductData);
-
-const addProduct = () => {
+const addProduct = () => 
+{
   if (formValidation()) {
-    const name = (document.getElementById('name') as HTMLInputElement).value;
-    const desc = (document.getElementById('desc') as HTMLInputElement).value;
-    const price = (document.getElementById('price') as HTMLInputElement).value;
+    const name: string = (document.getElementById("name") as HTMLInputElement).value;
+    const desc:string = (document.getElementById("desc") as HTMLInputElement).value;
+    const price:string = (document.getElementById("price") as HTMLInputElement).value;
     const product = { name, desc, price };
-    
-    
-    productStore.update(products => {
-      const updatedProducts = [...products, product];
-      localStorage.setItem('productData', JSON.stringify(updatedProducts));
-      return updatedProducts;
-    });
+    productStore.update(products => [...products, product]);
+
   }
+  (document.getElementById("name") as HTMLInputElement).value = '';
+  (document.getElementById("desc") as HTMLInputElement).value = '';
+  (document.getElementById("price") as HTMLInputElement).value = '';
 };
 
 
-productStore.subscribe(products => {
-  localStorage.setItem('productData', JSON.stringify(products));
-});
+const removeProduct = () => {
+  const name: string = (document.getElementById("name") as HTMLInputElement).value;
+  productStore.update(products => products.filter(product => product.name == name));
+}
 
 //.........End Add data in table...........
 </script>
@@ -147,7 +151,7 @@ productStore.subscribe(products => {
                     <button class="btn bg-yellow-400 text-black font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" on:click={toggleEditProduct} type="button">
                       Edit
                     </button>
-                    <button class="btn bg-red-600 text-black font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" on:click={toggleDeleteProduct} type="button">
+                    <button class="btn bg-red-600 text-black font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" on:click={toggleDeleteProduct}  type="submit">
                       Delete
                     </button>
                   </td>
@@ -163,7 +167,7 @@ productStore.subscribe(products => {
 <div class="{addproduct ? ' ':'hidden'}  h-screen top-0 left-0 bottom-0 right-0  fixed  backdrop-blur-md">
 <div class="pt-10  ml-auto mr-auto w-full h-full max-w-md md:h-auto  ">
   
-  <form class="bg-white shadow-md rounded border-8 border-double pt-10  w-full" on:submit|preventDefault={formValidation}>
+  <form class="bg-white shadow-md rounded border-8 border-double pt-10  w-full" on:submit|preventDefault={formValidation} on:submit|preventDefault={addProduct}>
     <p class="text-black font-bold text-2xl pb-5 ml-5">Add New Product</p>
     <div class="mb-4">
       <label class="block text-gray-700 text-sm font-bold mb-2 ml-5" for="">
@@ -217,7 +221,7 @@ productStore.subscribe(products => {
         <input class="shadow appearance-none border rounded  ml-5 py-2 w-11/12 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="name" type="text" placeholder="Enter Delete Product">
       </div>
       <div class="flex justify-end gap-2 pb-5 ">
-        <button class="btn bg-red-600 text-black font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" on:click={toggleDeleteProduct}  type="button">
+        <button class="btn bg-red-600 text-black font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="submit" on:click={toggleDeleteProduct}  >
           Delete
         </button>
         <button on:click={toggleDeleteProduct} class="btn bg-white text-black font-italic py-2 px-4 mr-4 rounded focus:outline-none focus:shadow-outline" type="button">

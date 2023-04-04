@@ -31,60 +31,7 @@
                   </td>
                 </tr>
               
-                <tr>
-                    <td class="px-6 py-4">
-                        <div class="flex items-center space-x-3">
-                             <div>
-                                <p> Shyam </p>   
-                            </div>
-                        </div>
-                    </td>
-    
-                    <td class="px-6 py-4">
-                        <p class="text-gray-500 text-sm font-semibold tracking-wide"> shyam@gmail.com </p>
-                    </td>
-                    
-                    <td class="px-6 py-4"> 
-                      <p class="text-gray-500 text-sm font-semibold tracking-wide">8965152566</p>
-                    </td>
-                  </tr>
-                
-                  <tr>
-                    <td class="px-6 py-4">
-                        <div class="flex items-center space-x-3">
-                             <div>
-                                <p> Hitesh </p>   
-                            </div>
-                        </div>
-                    </td>
-    
-                    <td class="px-6 py-4">
-                        <p class="text-gray-500 text-sm font-semibold tracking-wide"> hitesh@gmail.com </p>
-                    </td>
-                    
-                    <td class="px-6 py-4"> 
-                      <p class="text-gray-500 text-sm font-semibold tracking-wide">9720152566</p>
-                    </td>
-                  </tr>
-                
-                  <tr>
-                    <td class="px-6 py-4">
-                        <div class="flex items-center space-x-3">
-                             <div>
-                                <p> Harsh </p>   
-                            </div>
-                        </div>
-                    </td>
-    
-                    <td class="px-6 py-4">
-                        <p class="text-gray-500 text-sm font-semibold tracking-wide"> harsh@gmail.com </p>
-                    </td>
-                    
-                    <td class="px-6 py-4"> 
-                      <p class="text-gray-500 text-sm font-semibold tracking-wide">8720152556</p>
-                    </td>
-                  </tr>
-            </tbody>
+              </tbody>
         </table>
    
   </div>
