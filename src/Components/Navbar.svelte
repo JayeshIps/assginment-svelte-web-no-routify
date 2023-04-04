@@ -12,6 +12,7 @@
 	let activeComponent='Home';
     function showCurrentComponent(component:string){
     activeComponent = component;
+	showMenu = !showMenu;
     }
 
 </script>
@@ -43,10 +44,15 @@
 			md:items-center
 			md:justify-between
 			md:mt-0  {showMenu? 'flex md:flex': 'hidden'}">
+		 <!-- svelte-ignore a11y-missing-attribute -->
 		 <a class="text-white font-bold hover:text-blue-400"  on:click={() =>showCurrentComponent('Home')}>Home</a>
+		 <!-- svelte-ignore a11y-missing-attribute -->
 		 <a class="text-white font-bold hover:text-blue-400"  on:click={() =>showCurrentComponent('ProductUs')}>Products</a>
+		 <!-- svelte-ignore a11y-missing-attribute -->
 		 <a class="text-white font-bold hover:text-blue-400" on:click={() =>showCurrentComponent('AboutUs')}>About Us</a> 
+		 <!-- svelte-ignore a11y-missing-attribute -->
 		 <a class="text-white font-bold hover:text-blue-400" on:click={() =>showCurrentComponent('Admin')}>Admin</a> 
+		 <!-- svelte-ignore a11y-missing-attribute -->
 		 <a class="text-white font-bold hover:text-blue-400"  on:click={() =>showCurrentComponent('ContactUS')}>Contact US</a>
 		</div>
 	 </nav>

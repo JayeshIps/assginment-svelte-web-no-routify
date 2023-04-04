@@ -1,5 +1,6 @@
 <script lang="ts">
   // start validation form
+  import {writable ,type Writable } from "svelte/store";
   const formValidation = (): boolean => {
   
   const uname: string = (document.getElementById("userid") as HTMLInputElement).value;
@@ -49,6 +50,31 @@
    return true;
 };
 // .........End validation form..........
+
+const storeContactData = localStorage.getItem('contactData');
+const currentContactData = storeContactData ? JSON.parse(storeContactData):[];
+
+const contactStore=writable(currentContactData);
+
+export const addContact=()=>{
+  if(formValidation()){
+    const uname=(document.getElementById('userid') as HTMLInputElement).value;
+    const uemail=(document.getElementById('emailid') as HTMLInputElement).value;
+    const unumber=(document.getElementById('numid') as HTMLInputElement).value;
+    const contact ={uname,uemail,unumber};
+
+    contactStore.update(contacts=>{
+      const updateContact=[...contacts,contact];
+      localStorage.setItem('contactData',JSON.stringify(updateContact));
+      return updateContact;
+    });
+  }
+};
+
+contactStore.subscribe(contacts=>{
+  localStorage.setItem('contactData',JSON.stringify(contacts));
+});
+
 
 
 </script>
