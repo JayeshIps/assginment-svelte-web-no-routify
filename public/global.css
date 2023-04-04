@@ -2,7 +2,7 @@ html, body {
 	position: relative;
 	width: 100%;
 	height: 100%;
-	background-color:lavenderblush;
+	background-color:lightgrey;
 }
 .menu{
 	display: flex;
@@ -19,6 +19,12 @@ body {
 }
 .tb{
 	width: 75%;
+}
+
+.map{
+	width: 350px;
+	height: 190px;
+	border: 2px solid black;
 }
 
 
