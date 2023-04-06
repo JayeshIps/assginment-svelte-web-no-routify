@@ -20,10 +20,11 @@
 <div>
 	<div class="bg-gray-800 fixed ml-0 mr-0 w-full">
 		<div class="flex">
-            <img src="..\image\apple-logo-transparent.png" width="70px" alt="">
+            <img src="..\image\apple-logo-transparent.png" width="80px" alt="">
              
 		    <div class="ml-3 p-5">
                 <div class="text-white text-xl font-bold">IPHONES</div>
+				<div class="text-white text-lg font-bold">Think different</div>
             </div>
            
             <div class="absolute right-6">

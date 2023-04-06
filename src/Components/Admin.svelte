@@ -1,4 +1,6 @@
 <script lang="ts">
+import {contactStore } from '../store/storeData'
+
 
 </script>
 
@@ -12,25 +14,27 @@
                     
                 </tr>
             </thead>
+
             <tbody class="divide-y divide-gray-200">
+              {#each $contactStore as item}
               <tr>
                   <td class="px-6 py-4">
                       <div class="flex items-center space-x-3">
                            <div>
-                              <p> Hiren </p>   
+                              <p>{item.name} </p>   
                           </div>
                       </div>
                   </td>
   
                   <td class="px-6 py-4">
-                      <p class="text-gray-500 text-sm font-semibold tracking-wide"> Hiren@gmail.com </p>
+                      <p class="text-gray-500 text-sm font-semibold tracking-wide"> {item.email} </p>
                   </td>
                   
                   <td class="px-6 py-4"> 
-                    <p class="text-gray-500 text-sm font-semibold tracking-wide">7520152566</p>
+                    <p class="text-gray-500 text-sm font-semibold tracking-wide">{item.number}</p>
                   </td>
                 </tr>
-              
+              {/each}
               </tbody>
         </table>
    

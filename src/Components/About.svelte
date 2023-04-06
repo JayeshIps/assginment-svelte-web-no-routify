@@ -4,10 +4,11 @@
 
 <div class="grid md:grid-cols gap-2  md:ml-44 w-9/12 pt-44">
     <p class="text-black font-bold text-6xl">About Us</p><br>
-    <p class="text-black pt-1">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Fugit laboriosam, 
-    quia quaerat explicabo neque ad obcaecati aliquid quas delectus omnis perspiciatis modi tempora dolore incidunt expedita? 
-    Animi tenetur dolorem ipsa corrupti vel sed earum odit. Molestias, libero consequatur! Voluptatem, quam itaque. Perspiciatis 
-    labore commodi veniam, optio quisquam provident veritatis modi minima illum! Harum eaque aliquid temporibus magnam rem perferendis
+    <p class="text-black text-lg">My Name is Jayesh Prajapati Currently I am working on It Path Solution as a Full Stack Devloper</p><br>
+    <p class="text-black pt-1 text-lg">Apple Inc. (Apple) designs, manufactures and markets smartphones, personal computers, tablets, wearables and accessories and sells a range of related services. 
+        The Company's products include iPhone, Mac, iPad, AirPods, Apple TV, Apple Watch, Beats products, HomePod, iPod touch and accessories.
+        Apple's mission is “to bring the best user experience to its customers through innovative hardware, software, and services.”
+        And in a manifesto dated 2019, Tim Cook set the vision as “We believe that we are on the face of the earth to make great products, and that's not changing.
 </div>
  
 <div class="grid md:grid-cols gap-2 mt-8 md:ml-44 w-9/12 pt-10">
