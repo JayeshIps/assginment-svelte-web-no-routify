@@ -1,6 +1,7 @@
 <script lang="ts">
   // start validation form
   import {writable ,type Writable } from "svelte/store";
+  import {contactStore } from '../store/storeData'
   const formValidation = (): boolean => {
   
   const uname: string = (document.getElementById("userid") as HTMLInputElement).value;
@@ -51,30 +52,24 @@
 };
 // .........End validation form..........
 
-const storeContactData = localStorage.getItem('contactData');
-const currentContactData = storeContactData ? JSON.parse(storeContactData):[];
+type Contact = {
+  name: string,
+  email: string,
+  number: string;
+}
 
-const contactStore=writable(currentContactData);
-
-export const addContact=()=>{
-  if(formValidation()){
-    const uname=(document.getElementById('userid') as HTMLInputElement).value;
-    const uemail=(document.getElementById('emailid') as HTMLInputElement).value;
-    const unumber=(document.getElementById('numid') as HTMLInputElement).value;
-    const contact ={uname,uemail,unumber};
-
-    contactStore.update(contacts=>{
-      const updateContact=[...contacts,contact];
-      localStorage.setItem('contactData',JSON.stringify(updateContact));
-      return updateContact;
-    });
+const addContact = () => {
+  if (formValidation()) {
+    const name = (document.getElementById('userid') as HTMLInputElement).value;
+    const email = (document.getElementById('emailid') as HTMLInputElement).value;
+    const number = (document.getElementById('numid') as HTMLInputElement).value;
+    const contact: Contact = { name, email, number };
+    contactStore.update(contacts => [...contacts, contact]);
   }
+  (document.getElementById("userid") as HTMLInputElement).value = '';
+  (document.getElementById("emailid") as HTMLInputElement).value = '';
+  (document.getElementById("numid") as HTMLInputElement).value = '';
 };
-
-contactStore.subscribe(contacts=>{
-  localStorage.setItem('contactData',JSON.stringify(contacts));
-});
-
 
 
 </script>
@@ -109,7 +104,7 @@ contactStore.subscribe(contacts=>{
           </div>
           
           <div class="flex justify-end gap-2 pb-5 ">
-            <button class="btn bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="submit" on:click={formValidation}>
+            <button class="btn bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="submit" on:click={() => {formValidation(); addContact() }}>
               Submit
             </button>
             <button  class="btn bg-white text-black font-italic py-2 px-4 mr-4 rounded focus:outline-none focus:shadow-outline" type="button">
@@ -119,7 +114,7 @@ contactStore.subscribe(contacts=>{
         </form>
   </div>
 
-  <div class="pt-44 ">
+  <div class="pt-44  ">
       <!-- svelte-ignore a11y-missing-attribute -->
       <iframe class="map" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3671.8779361948978!2d72.49672071400717!3d23.0282536218966!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x395e84d5c5d6ba3f%3A0x2dac1a9a5d5f34be!2sIT%20Path%20Solutions!5e0!3m2!1sen!2sin!4v1680410435695!5m2!1sen!2sin"></iframe>
       <div class="pt-6">
@@ -127,7 +122,7 @@ contactStore.subscribe(contacts=>{
           <p class="text-black font-bold text-3xl">Reach Out to Us</p>
         </div>
         <div class="pt-4">
-          <p class="text-black flex-cols-2 font-bold">Address LINE1</p>
+          <p class="text-black flex-cols-2 font-bold">Binori b square 1</p>
         </div>
         <div class="pt-1">
           <p class="text-black flex-cols-2 font-bold">[Iskon],[Ahmedabad]</p>
