@@ -1,55 +1,62 @@
 <script lang="ts">
   // start validation form
-  import {writable ,type Writable } from "svelte/store";
-  import {contactStore } from '../store/storeData'
-  const formValidation = (): boolean => {
+import {contactStore } from '../store/storeData'
   
+  const formValidation = (): boolean => {
+  let status:boolean=true;
   const uname: string = (document.getElementById("userid") as HTMLInputElement).value;
   const mobile: string = (document.getElementById("numid") as HTMLInputElement).value;
   const email: string = (document.getElementById("emailid") as HTMLInputElement).value;
 
   if (uname === "") {
-    (document.getElementById("validation_userid") as HTMLElement).innerHTML = "Please Enter Name";
-    return false;
+    (document.getElementById("validation_userid") as HTMLElement).innerHTML = "This Field Is Required";
+    status=false;
   }
-
-  if (uname.length <= 2 || uname.length > 10) {
+  else if (uname.length <= 2 || uname.length > 10) {
     (document.getElementById("validation_userid") as HTMLElement).innerHTML = "Username Lenght must be between 2 to 10";
-    return false;
+    status=false;
   }
-
-  if (!isNaN(Number(uname))) {
+  else if (!isNaN(Number(uname))) {
     (document.getElementById("validation_userid") as HTMLElement).innerHTML = "Username Allowed Only Text Character";
-    return false;
+    status=false;
   }
 
   
     if (email === "") {
-      (document.getElementById("validation_emailid") as HTMLElement).innerHTML = "Please Enter Email";
-      return false;
+      (document.getElementById("validation_emailid") as HTMLElement).innerHTML = "This Field Is Required";
+      status=false;
     }
-  
-    if (email.indexOf("@") <= 0) {
+    else if (email.indexOf("@") <= 0) {
       (document.getElementById("validation_emailid") as HTMLElement).innerHTML = "Invalid Email!!";
-      return false;
+      status=false;
     }
 
   if (mobile === "") {
-    (document.getElementById("validation_numid") as HTMLElement).innerHTML = "Please Enter Mobile Number";
-    return false;
+    (document.getElementById("validation_numid") as HTMLElement).innerHTML = "This Field Is Required";
+    status=false;
   }
-
-  if (isNaN(Number(mobile))) {
+  else if (isNaN(Number(mobile))) {
     (document.getElementById("validation_numid") as HTMLElement).innerHTML = "Please Enter Only Number";
-    return false;
+    status=false;
   }
-
-  if (mobile.length !== 10) {
+  else if (mobile.length !== 10) {
     (document.getElementById("validation_numid") as HTMLElement).innerHTML = "Enter Only 10 Digit of mobile number";
-    return false;
+    status=false;
   }
-   return true;
+   return status;
 };
+
+ const clearContactFormvalidation=()=>{
+  (document.getElementById("validation_userid") as HTMLElement).innerHTML = " ";
+  (document.getElementById("validation_emailid") as HTMLElement).innerHTML = " ";
+  (document.getElementById("validation_numid") as HTMLElement).innerHTML = " ";
+ }
+ const emptyContactAddForm=()=>{
+  (document.getElementById("userid") as HTMLInputElement).value = '';
+  (document.getElementById("emailid") as HTMLInputElement).value = '';
+  (document.getElementById("numid") as HTMLInputElement).value = '';
+};
+
 // .........End validation form..........
 
 type Contact = {
@@ -65,11 +72,13 @@ const addContact = () => {
     const number = (document.getElementById('numid') as HTMLInputElement).value;
     const contact: Contact = { name, email, number };
     contactStore.update(contacts => [...contacts, contact]);
+    clearContactFormvalidation();
+    emptyContactAddForm();
   }
-  (document.getElementById("userid") as HTMLInputElement).value = '';
-  (document.getElementById("emailid") as HTMLInputElement).value = '';
-  (document.getElementById("numid") as HTMLInputElement).value = '';
+  
 };
+
+
 
 
 </script>
@@ -77,7 +86,7 @@ const addContact = () => {
 <div class="w-9/12 flex justify-between">
   <div class="pt-44  md:ml-44  w-full max-w-md md:h-auto">
         
-        <form class="bg-white shadow-md rounded border-8 border-double pt-12  w-full" on:submit|preventDefault={formValidation}>
+        <form class="bg-white shadow-md rounded border-8 border-double pt-12  w-full" action="#">
           
           <div class="mb-4">
             <label class="block text-gray-700 text-sm font-bold mb-2 ml-5" for="">
@@ -104,10 +113,10 @@ const addContact = () => {
           </div>
           
           <div class="flex justify-end gap-2 pb-5 ">
-            <button class="btn bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="submit" on:click={() => {formValidation(); addContact() }}>
+            <button class="btn bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="submit" on:click={() => {formValidation(); addContact(); }}>
               Submit
             </button>
-            <button  class="btn bg-white text-black font-italic py-2 px-4 mr-4 rounded focus:outline-none focus:shadow-outline" type="button">
+            <button  class="btn bg-white text-black font-italic py-2 px-4 mr-4 rounded focus:outline-none focus:shadow-outline" type="button" on:click={() => { clearContactFormvalidation(); emptyContactAddForm();}}>
               Reset    
             </button>
           </div>

@@ -18,7 +18,7 @@
 </script>
 
 <div>
-	<div class="bg-gray-800 fixed ml-0 mr-0 w-full">
+	<div class="bg-gray-800 absolute left-0 right-0">
 		<div class="flex">
             <img src="..\image\apple-logo-transparent.png" width="80px" alt="">
              
