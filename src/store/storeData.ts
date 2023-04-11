@@ -47,8 +47,8 @@ import {writable ,type Writable } from "svelte/store";
 
 
 export const contactStore: Writable<Contact[]> = writable([
-    {name:'shubham',email:'shubham@gmail.com',number:'1234567896'},
-    {name:'nikunj',email:'nikunj@gmail.com',number:'9734567896'},
+    {name:'Akshay',email:'akshay@gmail.com',number:'1234567896'},
+    {name:'parth',email:'parth@gmail.com',number:'9734567896'},
     {name:'jayesh',email:'jayesh@gmail.com',number:'9834567896'},
     {name:'jitendra',email:'jitendra@gmail.com',number:'9935567896'},
     {name:'hardik',email:'hardik@gmail.com',number:'1234567896'},
