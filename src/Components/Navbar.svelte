@@ -4,21 +4,24 @@
 	import About from "./About.svelte";
 	import Admin from "./Admin.svelte";
 	import ContactUs from "./ContactUs.svelte";
+	import {Navigation} from '../enums/component';
+    import { currentTab } from "../store/NavigationStore";
+
+
 	let showMenu:boolean = false;
 	function toggleNavbar() {
 	  showMenu = !showMenu;
 	}
-
-	let activeComponent='Home';
-    function showCurrentComponent(component:string){
-    activeComponent = component;
-	showMenu = !showMenu;
+	
+	function showCurrentComponent(component){
+		currentTab.set(component)
+		showMenu = !showMenu;
     }
 
 </script>
 
 <div>
-	<div class="bg-gray-800 absolute left-0 right-0">
+	<div class="bg-gray-800 fixed ml-0 mr-0 w-full">
 		<div class="flex">
             <img src="..\image\apple-logo-transparent.png" width="80px" alt="">
              
@@ -46,28 +49,30 @@
 			md:justify-between
 			md:mt-0  {showMenu? 'flex md:flex': 'hidden'}">
 		 <!-- svelte-ignore a11y-missing-attribute -->
-		 <a class="text-white font-bold hover:text-blue-400"  on:click={() =>showCurrentComponent('Home')}>Home</a>
+		 <a class="text-white font-bold hover:text-blue-400"  on:click={() =>showCurrentComponent(Navigation.Home)}>Home</a>
 		 <!-- svelte-ignore a11y-missing-attribute -->
-		 <a class="text-white font-bold hover:text-blue-400"  on:click={() =>showCurrentComponent('ProductUs')}>Products</a>
+		 <a class="text-white font-bold hover:text-blue-400"  on:click={() =>showCurrentComponent(Navigation.ProductView)}>Products</a>
 		 <!-- svelte-ignore a11y-missing-attribute -->
-		 <a class="text-white font-bold hover:text-blue-400" on:click={() =>showCurrentComponent('AboutUs')}>About Us</a> 
+		 <a class="text-white font-bold hover:text-blue-400" on:click={() =>showCurrentComponent(Navigation.About)}>About Us</a> 
 		 <!-- svelte-ignore a11y-missing-attribute -->
-		 <a class="text-white font-bold hover:text-blue-400" on:click={() =>showCurrentComponent('Admin')}>Admin</a> 
+		 <a class="text-white font-bold hover:text-blue-400" on:click={() =>showCurrentComponent(Navigation.Admin)}>Admin</a> 
 		 <!-- svelte-ignore a11y-missing-attribute -->
-		 <a class="text-white font-bold hover:text-blue-400"  on:click={() =>showCurrentComponent('ContactUS')}>Contact US</a>
+		 <a class="text-white font-bold hover:text-blue-400"  on:click={() =>showCurrentComponent(Navigation.ContactUs)}>Contact US</a>
 		</div>
 	 </nav>
+	 <nav class="container px-1 py-1 mx-auto md:flex  md:items-center">
+
 	</div>
 </div>
-{#if activeComponent === 'Home'}
+{#if $currentTab === Navigation.Home}
   <Home/>
-  {:else if activeComponent === 'ProductUs'}
+  {:else if $currentTab === Navigation.ProductView}
   <ProductView/> 
-  {:else if activeComponent === 'AboutUs'}
+  {:else if $currentTab === Navigation.About}
   <About/> 
-  {:else if activeComponent === 'Admin'}
+  {:else if $currentTab === Navigation.Admin}
   <Admin/> 
-  {:else if activeComponent === 'ContactUS'}
+  {:else if $currentTab === Navigation.ContactUs}
   <ContactUs/> 
   {:else}
   <Home/>

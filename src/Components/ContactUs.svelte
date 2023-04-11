@@ -77,16 +77,12 @@ const addContact = () => {
   }
   
 };
-
-
-
-
 </script>
 
-<div class="w-9/12 flex justify-between">
-  <div class="pt-44  md:ml-44  w-full max-w-md md:h-auto">
+<div class="w-9/12 md:flex justify-between">
+  <div class="pt-44 md:w-full max-w-md md:h-auto ml-0 mr-0">
         
-        <form class="bg-white shadow-md rounded border-8 border-double pt-12  w-full" action="#">
+        <form class="bg-white shadow-md rounded border-8 border-double pt-12 md:ml-44  w-full" action="#">
           
           <div class="mb-4">
             <label class="block text-gray-700 text-sm font-bold mb-2 ml-5" for="">
@@ -123,7 +119,7 @@ const addContact = () => {
         </form>
   </div>
 
-  <div class="pt-44  ">
+  <div class="pt-44">
       <!-- svelte-ignore a11y-missing-attribute -->
       <iframe class="map" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3671.8779361948978!2d72.49672071400717!3d23.0282536218966!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x395e84d5c5d6ba3f%3A0x2dac1a9a5d5f34be!2sIT%20Path%20Solutions!5e0!3m2!1sen!2sin!4v1680410435695!5m2!1sen!2sin"></iframe>
       <div class="pt-6">

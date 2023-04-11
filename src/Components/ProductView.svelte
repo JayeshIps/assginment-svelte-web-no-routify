@@ -2,6 +2,7 @@
   import { v4 as uuidv4 } from 'uuid';
   import * as _ from 'lodash';
   import {productStore } from '../store/storeData'
+    import Navbar from './Navbar.svelte';
   
   // start Add Product validation form
 const formValidation = (): boolean => {
@@ -131,6 +132,8 @@ const emptyEditProductForm=()=>{
   (document.getElementById("eprice") as HTMLInputElement).value = '';
 }
 // .........End Edit validation form.......
+
+
   
 let addproduct:boolean=false;
 function toggleAddProduct(){
@@ -220,23 +223,42 @@ const saveProduct = () => {
 
 //.........Start delete data in table...........
 let delProductName='';
-const deleteProduct = (id: string,name:string):void => {
-  delProductName=name
+
+let delId='';
+let delName='';
+function findDeleteProduct(id: string,name:string){
+  delId=id;
+  delName=name;
+  delProductName=delName
+}
+
+const deleteProduct = ():void => {
+  const dname: string = (document.getElementById("dname") as HTMLInputElement).value;
   productStore.update(products => {
-    const index = _.findIndex(products, { id: id });
+    const index = _.findIndex(products, { id: delId });
     if (index !== -1) {
-      products.splice(index, 1);
-      (document.getElementById("dname") as HTMLInputElement).value = '';
+      if(dname===delName)
+      {
+        products.splice(index, 1);
+        (document.getElementById("dname") as HTMLInputElement).value = '';
+        toggleDeleteProduct();
+      }
+      else
+      {
+        (document.getElementById("delname") as HTMLElement).innerHTML = "Product Name is not Matched";
+      }
     }
+    
     return products;
   });
-}
+ }
+
 //.........End delete data in table...........
 </script>
 
-<div class="w-9/12">
-  <div class="flex justify-end ml-44 w-full pt-44">
-    <button class="bg-blue-500  hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"on:click|preventDefault={()=>{toggleAddProduct();}}>
+<div class="w-9/12 ">
+  <div class="flex justify-end ml-44 w-full pt-44 ">
+    <button class=" bg-blue-500  hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"on:click|preventDefault={()=>{toggleAddProduct();}}>
       Add Products
     </button>
   </div>
@@ -255,7 +277,7 @@ const deleteProduct = (id: string,name:string):void => {
           <tbody class="divide-y divide-gray-200">
             {#each $productStore as item}
               <tr>
-                <td class="px-6 py-4">
+                <td data-th="Name" class="px-6 py-4">
                   <div class="flex items-center space-x-3">
                     <div>
                       <p class="hidden">{item.id}</p>
@@ -263,17 +285,17 @@ const deleteProduct = (id: string,name:string):void => {
                     </div>
                   </div>
                 </td>
-                <td class="px-6 py-4">
+                <td data-th="Description" class="px-6 py-4">
                   <p class="text-gray-500 grid md:grid-cols text-sm font-semibold tracking-wide">{item.desc}</p>
                 </td>
-                <td class="px-6 py-4">
+                <td data-th="Price" class="px-6 py-4">
                   <p class="text-gray-500 text-sm font-semibold tracking-wide">{item.price}</p>
                 </td>
-                <td class="px-6 py-4">
+                <td data-th="Action" class="px-6 py-4">
                   <button type="button" class="btn bg-yellow-400 text-black font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" on:click={() => {toggleEditProduct(); updateProduct(item.id,item.name);}}>
                     Edit
                   </button>
-                  <button class="btn bg-red-600 text-black font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" on:click={() => {toggleDeleteProduct(); deleteProduct(item.id,item.name) }} type="button">
+                  <button class="btn bg-red-600 text-black font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" on:click={() => {toggleDeleteProduct(); findDeleteProduct(item.id,item.name) }} type="button">
                     Delete
                   </button>
                 </td>
@@ -343,10 +365,10 @@ const deleteProduct = (id: string,name:string):void => {
         <span id="delname" class="text-red-600 text-base ml-5"></span>
       </div>
       <div class="flex justify-end gap-2 pb-5 ">
-        <button class="btn bg-red-600 text-black font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="submit" on:click|preventDefault={()=>{toggleDeleteProduct();}}  >
+        <button class="btn bg-red-600 text-black font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="submit" on:click|preventDefault={()=>{deleteProduct();}}  >
           Delete
         </button>
-        <button on:click={toggleDeleteProduct} class="btn bg-white text-black font-italic py-2 px-4 mr-4 rounded focus:outline-none focus:shadow-outline" type="button">
+        <button on:click|preventDefault={()=>{toggleDeleteProduct();}}  class="btn bg-white text-black font-italic py-2 px-4 mr-4 rounded focus:outline-none focus:shadow-outline" type="button">
           Cancel    
         </button>
       </div>
@@ -389,7 +411,7 @@ const deleteProduct = (id: string,name:string):void => {
         
         <div class="flex justify-end gap-2 pb-5 ">
           <!-- svelte-ignore missing-declaration -->
-          <button class="btn bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="submit" id="editId"  on:click|preventDefault={()=>{saveProduct();formValidation();}}>
+          <button class="btn bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="submit" id="editId"  on:click|preventDefault={()=>{saveProduct();editFormvalidation();}}>
             Update
           </button>
           <button on:click={()=>{toggleEditProduct();emptyEditProductForm();clearEditFormvalidation();}} class="btn bg-white text-black font-italic py-2 px-4 mr-4 rounded focus:outline-none focus:shadow-outline" type="button">
@@ -401,3 +423,30 @@ const deleteProduct = (id: string,name:string):void => {
     </div>
     </div>
 <!--End Edit Product Form -->
+
+<style>
+  @media (max-width: 640px) {
+	table {
+		overflow-x: auto;
+		white-space: nowrap;
+		width: 100%;
+	}
+	thead{
+		display: none;
+	}
+	td::before {
+		content: attr(data-th);
+		float: left;
+		margin-right: 20px;
+		color: black;
+		font-weight: bold;
+	}
+	td {
+		display: block;
+		text-align: right;
+	}
+	td div{
+		float: right;
+	}
+}
+</style>

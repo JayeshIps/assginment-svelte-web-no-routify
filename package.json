@@ -28,6 +28,7 @@
   "dependencies": {
     "lodash": "^4.17.21",
     "sirv-cli": "^2.0.0",
+    "swiper": "^9.2.0",
     "uuid": "^9.0.0"
   }
 }

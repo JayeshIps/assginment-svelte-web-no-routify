@@ -1,35 +1,25 @@
 <script lang="ts">
-import Admin from "./Admin.svelte";
-import ProductView from "./ProductView.svelte";
 import {productStore } from '../store/storeData'
 import {contactStore } from '../store/storeData'
-
+import { currentTab } from "../store/NavigationStore";
+import { Navigation } from "../enums/component";
 
   let totalProducts = 0;
   let totalContacts = 0;
   
-
   $: totalProducts = Object.keys($productStore).length;
   $: totalContacts = Object.keys($contactStore).length;
   
-
-  
-  let showProducts = false;
-  let showContactUs = false;
-  
   function viewProducts() {
-    showProducts =! showProducts;
-    
+    $currentTab = Navigation.ProductView
   }
-  
   function viewContactUs() {
-    showContactUs =! showContactUs;
+    $currentTab = Navigation.ContactUs
   }
-
 </script>
-{#if !showProducts && !showContactUs}
 
-<div class=" grid md:grid-cols-2 gap-2 pt-36  flex justify-around md:ml-44 pt-44">
+
+<div class=" grid md:grid-cols-2 gap-2 pt-36  flex justify-between md:ml-44 pt-44">
            
   <div class=" max-w-sm rounded overflow-hidden shadow-lg rounded-xl bg-gray-800">
     
@@ -74,8 +64,3 @@ import {contactStore } from '../store/storeData'
        Core Location also reports the device’s orientation relative to true north.
 </div>
 
-{:else if showProducts}
-    <ProductView />
-{:else if showContactUs}
-    <Admin />
-{/if}
